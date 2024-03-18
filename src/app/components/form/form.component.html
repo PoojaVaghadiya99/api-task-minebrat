@@ -1,0 +1,105 @@
+<div class="container mt-5 justify-content-center align-items-center">
+    <div class="card">
+        <div class="card-header bg-white">Form Details</div>
+        <div class="card-body">
+            <form [formGroup]="form" (submit)="onSubmit()">
+                <!-- FirstName -->
+                <div class="form-group m-4">
+                    <label>First Name</label>
+                    <input type="text" name="fname" class="form-control my-2" formControlName="fname">
+                </div>
+
+                <!-- Last Name -->
+                <div class="form-group m-4">
+                    <label>Last Name</label>
+                    <input type="text" name="lname" class="form-control my-2" formControlName="lname">
+                </div>
+
+                <!-- Age -->
+                <div class="form-group m-4">
+                    <label>Age</label>
+                    <input type="text" name="age" class="form-control my-2" formControlName="age">
+                </div>
+
+                <!-- Profile Picture -->
+                <div class="form-group m-4">
+                    <label>Profile Picture</label>
+                    <input type="file" name="profile" class="form-control my-2" formControlName="profile">
+                </div>
+
+                <!-- Experience -->
+                <div class="form-group m-4">
+                    <label>Experience</label>
+                    <input type="file" name="experience" (change)="onFileChange($event)" class="form-control my-2"
+                        formControlName="experience" multiple>
+
+                </div>
+
+                <!-- Educational Details -->
+                <div class="form-group m-4">
+                    <label>Educational Details</label>
+                    <div formArrayName="educationalDetails">
+                        <div class="row" *ngFor="let eduDetail of educationalDetails.controls; let i = index"
+                            [formGroupName]="i">
+                            <div class="col-md-4">
+                                <div class="form-group m-4">
+                                    <label>Institute Name</label>
+                                    <input type="text" class="form-control my-2" formControlName="institute">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group m-4">
+                                    <label>Qualification</label>
+                                    <input type="text" class="form-control my-2" formControlName="qualification">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-danger m-4" type="button"
+                                    (click)="removeEducationDetail(i)">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" type="button" (click)="addEducationDetail()">Add Education
+                                Detail</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group m-4">
+                    <label>Address</label>
+                    <div class="form-group m-4">
+                        <label>Address 1</label>
+                        <input type="text" name="address1" class="form-control my-2" formControlName="address1">
+                    </div>
+                    <div class="form-group m-4">
+                        <label>Address 2</label>
+                        <input type="text" name="address2" class="form-control my-2" formControlName="address2">
+                    </div>
+                    <div class="form-group m-4">
+                        <label>State</label>
+                        <select formControlName="state" class="form-control my-2" (change)="onStateChange($event)">
+                            <option *ngFor="let state of states" [value]="state.stateId">{{ state.stateName }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group m-4">
+                        <label>City</label>
+                        <select formControlName="city" class="form-control my-2" multiple>
+                            <option *ngFor="let city of cities" [value]="city.cityId">{{ city.cityName }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group m-4">
+                        <label>Country</label>
+                        <input type="text" name="country" class="form-control my-2" formControlName="country">
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
